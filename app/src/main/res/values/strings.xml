@@ -3,4 +3,8 @@
     <string name="long_map">Longitude</string>
     <string name="lat_map">Latitude</string>
     <string name="location">Find me!</string>
+    <string name="choosemap">Choosemap</string>
+    <string name="regularview">regular view</string>
+    <string name="hikebikemapview">hike bike view</string>
+    <string name="selectmap">Select map</string>
 </resources>
