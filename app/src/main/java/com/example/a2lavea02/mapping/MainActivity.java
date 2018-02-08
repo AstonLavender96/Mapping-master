@@ -56,11 +56,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        Intent intent = new Intent(this, MapChooseActivity.class);
-        startActivityForResult(intent,0);
+
         if(item.getItemId()== R.id.choosemap)
         {
             // react to the menu being selected.
+            Intent intent = new Intent(this, MapChooseActivity.class);
+            startActivityForResult(intent,0);
             return true;
         }
         return false;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             if(resultCode==RESULT_OK)
             {
                 Bundle extras=intent.getExtras();
-                boolean hikebikemap = extras.getBoolean("com.example.lavender_a.hikebikemap");
+                boolean hikebikemap = extras.getBoolean("com.example.hikebikemap");
                 if(hikebikemap==true)
                 {
                     mv.setTileSource(TileSourceFactory.HIKEBIKEMAP);

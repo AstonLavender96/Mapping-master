@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 
 
 public class MapChooseActivity extends AppCompatActivity implements OnClickListener{
+
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,7 @@ public class MapChooseActivity extends AppCompatActivity implements OnClickListe
         {
             hikebikemap=true;
         }
-        bundle.putBoolean("com.example.lavender_a.hikebikemap", hikebikemap);
+        bundle.putBoolean("com.example.hikebikemap", hikebikemap);
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();
