@@ -7,4 +7,5 @@
     <string name="regularview">regular view</string>
     <string name="hikebikemapview">hike bike view</string>
     <string name="selectmap">Select map</string>
+    <string name="setlocation">Set Location</string>
 </resources>

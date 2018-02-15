@@ -64,6 +64,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             startActivityForResult(intent,0);
             return true;
         }
+        else if(item.getItemId() == R.id.setlocation)
+        {
+            Intent intent = new Intent(this, SetLocationActivity.class);
+            startActivityForResult(intent,1);
+            return true;
+        }
         return false;
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent intent)
@@ -82,6 +88,17 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 {
                     mv.setTileSource(TileSourceFactory.MAPNIK);
                 }
+            }
+        }
+        else if(requestCode==1)
+        {
+            if(resultCode==RESULT_OK)
+            {
+                Bundle extras=intent.getExtras();
+                double latitude = extras.getDouble("com.example.setlat");
+                double longitude = extras.getDouble("com.example.setlon");
+                mv.getController().setCenter(new GeoPoint(latitude, longitude));
+
             }
         }
     }
