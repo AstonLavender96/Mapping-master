@@ -8,24 +8,6 @@
 
 
 
-       <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et1"
-            android:layout_toLeftOf="@+id/btn1"
-            android:inputType="numberSigned|numberDecimal"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et2"
-            android:layout_toLeftOf="@+id/btn1"
-            android:inputType="numberSigned|numberDecimal"
-            />
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:id="@+id/btn1" android:text="@string/location"
-            android:layout_alignParentRight="true"/>
 
 
     <org.osmdroid.views.MapView

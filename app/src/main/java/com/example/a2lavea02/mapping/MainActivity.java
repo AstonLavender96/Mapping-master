@@ -1,5 +1,7 @@
 package com.example.a2lavea02.mapping;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -21,7 +23,7 @@ import android.content.Intent;
 
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener{
+public class MainActivity extends AppCompatActivity{
     MapView mv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +36,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         mv.getController().setZoom(16);
 
         mv.getController().setCenter(new GeoPoint(51.8361, -0.4577));
-
-        Button b =(Button)findViewById(R.id.btn1);
-        b.setOnClickListener(this);
-    }
-    public void onClick(View view)
-    {
-        EditText lattext = (EditText)findViewById(R.id.et1);
-        EditText longtext = (EditText)findViewById(R.id.et2);
-        double latitude = Double.parseDouble(lattext.getText().toString());
-        double longitude = Double.parseDouble(longtext.getText().toString());
-        mv.getController().setCenter(new GeoPoint(latitude, longitude));
 
     }
 
@@ -102,4 +93,26 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             }
         }
     }
+    public void onStart()
+    {
+        super.onStart();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        double lat = Double.parseDouble( prefs.getString("lat", "50.9"));
+        double lon = Double.parseDouble( prefs.getString("lon", "-1.4"));
+        boolean autodownload = prefs.getBoolean("autodownload", true);
+        String POICode = prefs.getString("POI", "0");
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+POICode);
+        if(POICode.equals("0")){
+                mv.getController().setCenter(new GeoPoint(lat, lon));// Set the map lat and lon to the "lat" and "lon" preferences
+            }
+            else if (POICode.equals("L")) {
+            mv.getController().setCenter(new GeoPoint(51.0, 0.0));// set lat and lon to the lat and lon for London
+            }
+            else if (POICode.equals("T")) {
+            mv.getController().setCenter(new GeoPoint(35.6895, 139.6917));
+            }
+
+    }
+
+
 }

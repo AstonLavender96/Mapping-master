@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string-array name="POI">
+        <item>None</item>
+        <item>London</item>
+        <item>Tokyo</item>
+        <item>Cyprus</item>
+        <item>Nagoya</item>
+    </string-array>
+    <string-array name="POICodes">
+        <item>0</item>
+        <item>L</item>
+        <item>T</item>
+        <item>C</item>
+        <item>N</item>
+    </string-array>
+
+</resources>
