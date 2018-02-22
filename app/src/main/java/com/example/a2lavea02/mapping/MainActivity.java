@@ -25,6 +25,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 
 public class MainActivity extends AppCompatActivity{
     MapView mv;
+    int TEST=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,12 @@ public class MainActivity extends AppCompatActivity{
             startActivityForResult(intent,1);
             return true;
         }
+        else if(item.getItemId() == R.id.prefmap)
+        {
+            Intent intent = new Intent(this, Preference_Activity.class);
+            startActivityForResult(intent, 0);
+            return true;
+        }
         return false;
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent intent)
@@ -85,10 +92,12 @@ public class MainActivity extends AppCompatActivity{
         {
             if(resultCode==RESULT_OK)
             {
+                TEST = 1;
                 Bundle extras=intent.getExtras();
                 double latitude = extras.getDouble("com.example.setlat");
                 double longitude = extras.getDouble("com.example.setlon");
-                mv.getController().setCenter(new GeoPoint(latitude, longitude));
+                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+latitude+longitude);
+                mv.getController().setCenter(new GeoPoint(latitude,longitude));
 
             }
         }
@@ -100,19 +109,32 @@ public class MainActivity extends AppCompatActivity{
         double lat = Double.parseDouble( prefs.getString("lat", "50.9"));
         double lon = Double.parseDouble( prefs.getString("lon", "-1.4"));
         boolean autodownload = prefs.getBoolean("autodownload", true);
-        String POICode = prefs.getString("POI", "0");
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+POICode);
-        if(POICode.equals("0")){
-                mv.getController().setCenter(new GeoPoint(lat, lon));// Set the map lat and lon to the "lat" and "lon" preferences
+        String POICode = prefs.getString("POI", "H");
+       //////// String MapCode = prefs.getString("MStyle", "Hike");
+        int zoom = Integer.parseInt(prefs.getString("zoom", "16"));
+        mv.getController().setZoom(zoom);
+
+
+        if(POICode.equals("H") && TEST!=1){
+            mv.getController().setCenter(new GeoPoint(lat, lon));// Set the map lat and lon to the "lat" and "lon" preferences
             }
-            else if (POICode.equals("L")) {
+            else if (POICode.equals("L")&& TEST!=1) {
             mv.getController().setCenter(new GeoPoint(51.0, 0.0));// set lat and lon to the lat and lon for London
             }
-            else if (POICode.equals("T")) {
+            else if (POICode.equals("T")&& TEST!=1) {
             mv.getController().setCenter(new GeoPoint(35.6895, 139.6917));
             }
+            else if (POICode.equals("C")&& TEST!=1) {
+            mv.getController().setCenter(new GeoPoint(35.1264, 33.3299));
+            }
+            else if (POICode.equals("N")&& TEST!=1) {
+            mv.getController().setCenter(new GeoPoint(35.1814, 136.9064));
+            }
+        TEST = 0;
+
 
     }
+
 
 
 }

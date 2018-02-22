@@ -3,7 +3,8 @@
 
     <EditTextPreference android:key="lat" android:defaultValue="50.9" android:title="Latitude" android:summary="Latitude to show the map at initially."/>
     <EditTextPreference android:key="lon" android:defaultValue="-1.4" android:title="Longitude" android:summary="Longitude to show the map at initially"/>
-
+    <EditTextPreference android:key="zoom" android:defaultValue="16" android:title="Zoom" android:summary="Set your zoom preference"/>
+    <EditTextPreference android:key="lat" android:defaultValue="50.9" android:title="Latitude" android:summary="Latitude to show the map at initially."/>
 <CheckBoxPreference android:key="autodownload" android:defaultValue="true" android:title="Auto-download"
     android:summary="Auto-download data surround cinemas?"/>
 

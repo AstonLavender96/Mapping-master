@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="POI">
-        <item>None</item>
+        <item>Home</item>
         <item>London</item>
         <item>Tokyo</item>
         <item>Cyprus</item>
         <item>Nagoya</item>
     </string-array>
     <string-array name="POICodes">
-        <item>0</item>
+        <item>H</item>
         <item>L</item>
         <item>T</item>
         <item>C</item>
         <item>N</item>
+    </string-array>
+    <string-array name="">
+
     </string-array>
 
 </resources>

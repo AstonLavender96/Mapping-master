@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.content.Intent;
 
 public class SetLocationActivity extends AppCompatActivity implements OnClickListener {
+
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
