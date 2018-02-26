@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity{
                 Bundle extras=intent.getExtras();
                 double latitude = extras.getDouble("com.example.setlat");
                 double longitude = extras.getDouble("com.example.setlon");
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+latitude+longitude);
                 mv.getController().setCenter(new GeoPoint(latitude,longitude));
 
             }
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity{
         double lon = Double.parseDouble( prefs.getString("lon", "-1.4"));
         boolean autodownload = prefs.getBoolean("autodownload", true);
         String POICode = prefs.getString("POI", "H");
-       //////// String MapCode = prefs.getString("MStyle", "Hike");
+        String MapViewCodes = prefs.getString("MapView", "B");
         int zoom = Integer.parseInt(prefs.getString("zoom", "16"));
         mv.getController().setZoom(zoom);
 
@@ -131,7 +130,12 @@ public class MainActivity extends AppCompatActivity{
             mv.getController().setCenter(new GeoPoint(35.1814, 136.9064));
             }
         TEST = 0;
-
+        if(MapViewCodes.equals("B")){
+            mv.setTileSource(TileSourceFactory.MAPNIK);
+        }
+        else if(MapViewCodes.equals("HB")){
+            mv.setTileSource(TileSourceFactory.HIKEBIKEMAP);
+        }
 
     }
 

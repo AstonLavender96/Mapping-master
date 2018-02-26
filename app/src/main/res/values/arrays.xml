@@ -14,8 +14,13 @@
         <item>C</item>
         <item>N</item>
     </string-array>
-    <string-array name="">
-
+<string-array name="MapView">
+    <item>Bike map</item>
+    <item>Hike Bike map</item>
+</string-array>
+    <string-array name="MapViewCodes">
+        <item>B</item>
+        <item>HB</item>
     </string-array>
 
 </resources>
