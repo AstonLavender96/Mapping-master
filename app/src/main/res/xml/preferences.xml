@@ -10,5 +10,7 @@
 
     <ListPreference android:key="POI" android:title="ChoosePlace" android:summary="Choose your map"
         android:entries="@array/POI" android:entryValues="@array/POICodes"/>
+    <ListPreference android:key="MapView" android:title="Choose Map view" android:summary="Choose your map view"
+        android:entries="@array/MapView" android:entryValues="@array/MapViewCodes"/>
 
 </PreferenceScreen>

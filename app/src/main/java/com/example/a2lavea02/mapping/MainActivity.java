@@ -65,7 +65,13 @@ public class MainActivity extends AppCompatActivity{
         else if(item.getItemId() == R.id.prefmap)
         {
             Intent intent = new Intent(this, Preference_Activity.class);
-            startActivityForResult(intent, 0);
+            startActivityForResult(intent, 2);
+            return true;
+        }
+        else if(item.getItemId() == R.id.map)
+        {
+            Intent intent = new Intent(this, ListViewActivity.class);
+            startActivityForResult(intent, 3);
             return true;
         }
         return false;
@@ -98,6 +104,22 @@ public class MainActivity extends AppCompatActivity{
                 double longitude = extras.getDouble("com.example.setlon");
                 mv.getController().setCenter(new GeoPoint(latitude,longitude));
 
+            }
+        }
+        else if(requestCode==3)
+        {
+            if(resultCode==RESULT_OK)
+            {
+                Bundle extras=intent.getExtras();
+                boolean hikebikemap = extras.getBoolean("com.example.hikebikemap");
+                if(hikebikemap==true)
+                {
+                    mv.setTileSource(TileSourceFactory.HIKEBIKEMAP);
+                }
+                else
+                {
+                    mv.setTileSource(TileSourceFactory.MAPNIK);
+                }
             }
         }
     }

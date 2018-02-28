@@ -31,6 +31,9 @@
         </activity>
         <activity android:name=".Preference_Activity" android:label="Set Preference">
 
+    </activity>
+        <activity android:name=".ListViewActivity" android:label="List View">
+
         </activity>
     </application>
 
