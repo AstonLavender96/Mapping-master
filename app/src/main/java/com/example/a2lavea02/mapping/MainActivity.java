@@ -9,6 +9,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity{
         else if(item.getItemId() == R.id.map)
         {
             Intent intent = new Intent(this, ListViewActivity.class);
-            startActivityForResult(intent, 3);
+            startActivityForResult(intent, 0);
             return true;
         }
         return false;
@@ -82,8 +83,9 @@ public class MainActivity extends AppCompatActivity{
         {
             if(resultCode==RESULT_OK)
             {
+                TEST = 1;
                 Bundle extras=intent.getExtras();
-                boolean hikebikemap = extras.getBoolean("com.example.hikebikemap");
+                boolean hikebikemap = extras.getBoolean("com.example.a2lavea02.mapping.hikebikemap");
                 if(hikebikemap==true)
                 {
                     mv.setTileSource(TileSourceFactory.HIKEBIKEMAP);
@@ -106,26 +108,11 @@ public class MainActivity extends AppCompatActivity{
 
             }
         }
-        else if(requestCode==3)
-        {
-            if(resultCode==RESULT_OK)
-            {
-                Bundle extras=intent.getExtras();
-                boolean hikebikemap = extras.getBoolean("com.example.hikebikemap");
-                if(hikebikemap==true)
-                {
-                    mv.setTileSource(TileSourceFactory.HIKEBIKEMAP);
-                }
-                else
-                {
-                    mv.setTileSource(TileSourceFactory.MAPNIK);
-                }
-            }
-        }
+
     }
-    public void onStart()
+    public void onResume()
     {
-        super.onStart();
+        super.onResume();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         double lat = Double.parseDouble( prefs.getString("lat", "50.9"));
         double lon = Double.parseDouble( prefs.getString("lon", "-1.4"));
@@ -136,29 +123,26 @@ public class MainActivity extends AppCompatActivity{
         mv.getController().setZoom(zoom);
 
 
-        if(POICode.equals("H") && TEST!=1){
-            mv.getController().setCenter(new GeoPoint(lat, lon));// Set the map lat and lon to the "lat" and "lon" preferences
+        if(TEST!=1) {
+            if (POICode.equals("H")) {
+                mv.getController().setCenter(new GeoPoint(lat, lon));// Set the map lat and lon to the "lat" and "lon" preferences
+            } else if (POICode.equals("L")) {
+                mv.getController().setCenter(new GeoPoint(51.0, 0.0));// set lat and lon to the lat and lon for London
+            } else if (POICode.equals("T")) {
+                mv.getController().setCenter(new GeoPoint(35.6895, 139.6917));
+            } else if (POICode.equals("C")) {
+                mv.getController().setCenter(new GeoPoint(35.1264, 33.3299));
+            } else if (POICode.equals("N")) {
+                mv.getController().setCenter(new GeoPoint(35.1814, 136.9064));
             }
-            else if (POICode.equals("L")&& TEST!=1) {
-            mv.getController().setCenter(new GeoPoint(51.0, 0.0));// set lat and lon to the lat and lon for London
-            }
-            else if (POICode.equals("T")&& TEST!=1) {
-            mv.getController().setCenter(new GeoPoint(35.6895, 139.6917));
-            }
-            else if (POICode.equals("C")&& TEST!=1) {
-            mv.getController().setCenter(new GeoPoint(35.1264, 33.3299));
-            }
-            else if (POICode.equals("N")&& TEST!=1) {
-            mv.getController().setCenter(new GeoPoint(35.1814, 136.9064));
-            }
-        TEST = 0;
-        if(MapViewCodes.equals("B")){
-            mv.setTileSource(TileSourceFactory.MAPNIK);
-        }
-        else if(MapViewCodes.equals("HB")){
-            mv.setTileSource(TileSourceFactory.HIKEBIKEMAP);
-        }
 
+            if (MapViewCodes.equals("B")) {
+                mv.setTileSource(TileSourceFactory.MAPNIK);
+            } else if (MapViewCodes.equals("HB")) {
+                mv.setTileSource(TileSourceFactory.HIKEBIKEMAP);
+            }
+        }
+        TEST = 0;
     }
 
 

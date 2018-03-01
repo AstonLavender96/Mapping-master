@@ -1,6 +1,7 @@
 package com.example.a2lavea02.mapping;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -10,6 +11,9 @@ import android.view.LayoutInflater;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.content.Context;
+
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.views.MapView;
 
 /**
  * Created by 2lavea02 on 26/02/2018.
@@ -21,15 +25,30 @@ public class ListViewActivity extends ListActivity
 
     public void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
-        data = new String[] {"Bike Map View", "Hike Bike Map View" };
-        description = new String[] {"This will show you the normal bike map view.", "This will show you the Hike Bike map view."};
+        data = new String[] {"Map View", "Hike Bike Map View" };
+        description = new String[] {"This will show you the normal map view.", "This will show you the Hike Bike map view."};
         ArrayAdapter<String> adapter = new MyAdapter();
         setListAdapter(adapter);
+
     }
     public void onListItemClick(ListView lv, View view, int index, long id)
     {
         super.onListItemClick(lv, view, index, id);
+        Intent intent = new Intent();
+        Bundle bundle=new Bundle();
+        boolean MapView=false;
+
+        if (index == 1)
+        {
+            MapView=true;
+        }
+
+        bundle.putBoolean("com.example.a2lavea02.mapping.hikebikemap", MapView);
+        intent.putExtras(bundle);
+        setResult(RESULT_OK, intent);
+        finish();
 
 
 

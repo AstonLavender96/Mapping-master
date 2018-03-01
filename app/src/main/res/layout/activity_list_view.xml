@@ -6,13 +6,13 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="12px"
+        android:textSize="18px"
         android:text="@string/list_name"
         android:id="@+id/list_name"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="8px"
+        android:textSize="12px"
         android:text="@string/list_desc"
         android:id="@+id/list_desc"/>
 

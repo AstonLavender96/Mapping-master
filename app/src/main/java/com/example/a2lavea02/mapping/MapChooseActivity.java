@@ -33,7 +33,7 @@ public class MapChooseActivity extends AppCompatActivity implements OnClickListe
         {
             hikebikemap=true;
         }
-        bundle.putBoolean("com.example.hikebikemap", hikebikemap);
+        bundle.putBoolean("com.example.a2lavea02.mapping.hikebikemap", hikebikemap);
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();

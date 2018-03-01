@@ -35,8 +35,8 @@ public class SetLocationActivity extends AppCompatActivity implements OnClickLis
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
 
-        bundle.putDouble("com.example.setlat", latitude);
-        bundle.putDouble("com.example.setlon", longitude);
+        bundle.putDouble("setlat", latitude);
+        bundle.putDouble("setlon", longitude);
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();
