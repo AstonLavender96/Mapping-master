@@ -9,6 +9,12 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
+import android.location.LocationManager;
+import android.location.LocationListener;
+import android.location.Location;
+import android.content.Context;
+import android.widget.Toast;
+
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
@@ -24,9 +30,11 @@ import android.content.Intent;
 
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements LocationListener{
     MapView mv;
     int TEST=0;
+    boolean doNotRepositionOnResume = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +47,25 @@ public class MainActivity extends AppCompatActivity{
 
         mv.getController().setCenter(new GeoPoint(51.8361, -0.4577));
 
+        LocationManager mgr = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        mgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
     }
-
+    public void onLocationChanged(Location newLoc)
+    {
+        mv.getController().setCenter(new GeoPoint(newLoc.getLatitude(), newLoc.getLongitude()));
+    }
+    public void onProviderDisabled(String provider)
+    {
+        Toast.makeText(this, "Provider" + provider + " disabled", Toast.LENGTH_SHORT).show();
+    }
+    public void onProviderEnabled(String provider)
+    {
+        Toast.makeText(this, "Provider" + provider + " enabled", Toast.LENGTH_SHORT).show();
+    }
+    public void onStatusChanged(String provider, int status, Bundle extras)
+    {
+        Toast.makeText(this, "Status Changed: " + status, Toast.LENGTH_SHORT).show();
+    }
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater=getMenuInflater();
@@ -102,10 +127,10 @@ public class MainActivity extends AppCompatActivity{
             {
                 TEST = 1;
                 Bundle extras=intent.getExtras();
-                double latitude = extras.getDouble("com.example.setlat");
-                double longitude = extras.getDouble("com.example.setlon");
+                double latitude = extras.getDouble("com.example.a2lavea02.mapping.setlat");
+                double longitude = extras.getDouble("com.example.a2lavea02.mapping.setlon");
                 mv.getController().setCenter(new GeoPoint(latitude,longitude));
-
+                doNotRepositionOnResume = true;
             }
         }
 
@@ -123,7 +148,7 @@ public class MainActivity extends AppCompatActivity{
         mv.getController().setZoom(zoom);
 
 
-        if(TEST!=1) {
+        if(doNotRepositionOnResume==false) {
             if (POICode.equals("H")) {
                 mv.getController().setCenter(new GeoPoint(lat, lon));// Set the map lat and lon to the "lat" and "lon" preferences
             } else if (POICode.equals("L")) {
@@ -143,6 +168,7 @@ public class MainActivity extends AppCompatActivity{
             }
         }
         TEST = 0;
+        doNotRepositionOnResume = false;
     }
 
 

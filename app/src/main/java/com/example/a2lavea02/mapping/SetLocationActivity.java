@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.content.Intent;
 
 public class SetLocationActivity extends AppCompatActivity implements OnClickListener {
-
+    MapView mv;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -35,10 +35,12 @@ public class SetLocationActivity extends AppCompatActivity implements OnClickLis
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
 
-        bundle.putDouble("setlat", latitude);
-        bundle.putDouble("setlon", longitude);
+        bundle.putDouble("com.example.a2lavea02.mapping.setlat", latitude);
+        bundle.putDouble("com.example.a2lavea02.mapping.setlon", longitude);
         intent.putExtras(bundle);
+
         setResult(RESULT_OK, intent);
+        //mv.getController().setCenter(new GeoPoint(latitude, longitude));
         finish();
     }
 }
