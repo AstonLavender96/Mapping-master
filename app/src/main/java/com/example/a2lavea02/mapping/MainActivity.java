@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         };
         items = new ItemizedIconOverlay<OverlayItem>(this, new ArrayList<OverlayItem>(), markerGestureListener);
         OverlayItem markyate = new OverlayItem("Markyate", "Village of Markyate", new GeoPoint(51.8360, -0.4606));
-        //markyate.setMarker(getResources().getDrawable(R.drawable.marker));
+        markyate.setMarker(getResources().getDrawable(R.drawable.marker));
         items.addItem(markyate);
         items.addItems(csvtopoi());
         items.addItem(new OverlayItem("Luton", "Not so great town", new GeoPoint(51.8781, -0.4149)));
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public void onLocationChanged(Location newLoc) {
         mv.getController().setCenter(new GeoPoint(newLoc.getLatitude(), newLoc.getLongitude()));
     }
+
 
     public void onProviderDisabled(String provider) {
         Toast.makeText(this, "Provider" + provider + " disabled", Toast.LENGTH_SHORT).show();
